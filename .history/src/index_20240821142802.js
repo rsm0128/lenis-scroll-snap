@@ -5,12 +5,12 @@ import Lenis from 'lenis'
 import { ScrollSnap } from '@/js/scroll-snap'
 
 const lenis = new Lenis({
-  orientation: 'horizontal',
+  direction: 'horizontal',
   wrapper: document.getElementById('wrapper'),
   content: document.getElementById('root'),
 })
 
-// new ScrollSnap(lenis, { snapType: 'proximity' })
+new ScrollSnap(lenis, { snapType: '' })
 
 const lenisMandatory = new Lenis({
   direction: 'vertical',
@@ -19,6 +19,7 @@ const lenisMandatory = new Lenis({
 })
 
 new ScrollSnap(lenisMandatory, { snapType: '' })
+
 function raf(time) {
   lenis.raf(time)
   lenisMandatory.raf(time)

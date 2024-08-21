@@ -20,7 +20,7 @@ section {
   width: fit-content;
 }
 #wrapper {
-  overflow-x: auto !important;
+  overflow-x: auto;
   section {
     width: 500px;
   }

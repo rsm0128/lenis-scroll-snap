@@ -77,12 +77,12 @@ export class ScrollSnap {
 
     let limit = this.isHorizontal ? wrapperRect.width : wrapperRect.height
     if ('proximity' === this.snapType) {
-      limit *= 0.3 // proximity is 30%
+      limit *= 0.03 // proximity is 30%
     }
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
+      // console.log('skip')
       return
     }
     // console.log(element.element)

@@ -10,7 +10,7 @@ const lenis = new Lenis({
   content: document.getElementById('root'),
 })
 
-// new ScrollSnap(lenis, { snapType: 'proximity' })
+new ScrollSnap(lenis, { snapType: '' })
 
 const lenisMandatory = new Lenis({
   direction: 'vertical',
@@ -19,6 +19,7 @@ const lenisMandatory = new Lenis({
 })
 
 new ScrollSnap(lenisMandatory, { snapType: '' })
+
 function raf(time) {
   lenis.raf(time)
   lenisMandatory.raf(time)

@@ -4,11 +4,12 @@
 export class ScrollSnap {
   constructor(lenis, { snapType }) {
     this.lenis = lenis
-    this.isHorizontal = this.lenis.options.orientation === 'horizontal' // we can set different value in case we need snap for different axis.
+    this.isHorizontal = this.lenis.options.direction === 'horizontal' // we can set different value in case we need snap for different axis.
     this.rootElement =
       this.lenis.options.wrapperNode === window
         ? this.lenis.options.content
         : this.lenis.options.wrapper
+    console.log(this.rootElement)
     this.snapType = snapType || this.rootElement.getAttribute('scroll-snap-type') || 'mandatory'
 
     this.initElements()
@@ -48,7 +49,7 @@ export class ScrollSnap {
             width: this.lenis.wrapperWidth,
             height: this.lenis.wrapperHeight,
           }
-        : this.lenis.options.wrapper.getBoundingClientRect()
+        : this.lenis.options.wrapperNode.getBoundingClientRect()
 
     const wrapperPos = this.isHorizontal ? wrapperRect.left : wrapperRect.top
 
@@ -82,10 +83,9 @@ export class ScrollSnap {
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
       return
     }
-    // console.log(element.element)
+
     this.lenis.scrollTo(element.element, { offset: element.offset })
   }
 }
