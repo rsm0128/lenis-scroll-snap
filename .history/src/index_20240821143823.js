@@ -10,18 +10,19 @@ const lenis = new Lenis({
   content: document.getElementById('root'),
 })
 
-// new ScrollSnap(lenis, { snapType: 'proximity' })
+new ScrollSnap(lenis, { snapType: '' })
 
-const lenisMandatory = new Lenis({
-  direction: 'vertical',
-  wrapper: document.getElementById('wrapper-mandatory'),
-  content: document.getElementById('root-mandatory'),
-})
+// const lenisMandatory = new Lenis({
+//   direction: 'vertical',
+//   wrapper: document.getElementById('wrapper-mandatory'),
+//   content: document.getElementById('root-mandatory'),
+// })
 
-new ScrollSnap(lenisMandatory, { snapType: '' })
+// new ScrollSnap(lenisMandatory, { snapType: '' })
+
 function raf(time) {
   lenis.raf(time)
-  lenisMandatory.raf(time)
+  //   lenisMandatory.raf(time)
   requestAnimationFrame(raf)
 }
 

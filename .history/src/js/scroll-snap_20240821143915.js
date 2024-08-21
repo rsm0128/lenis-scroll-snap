@@ -69,6 +69,7 @@ export class ScrollSnap {
         }
 
         const elPos = this.isHorizontal ? elRect.left : elRect.top
+        console.log(elPos, wrapperPos, offset)
 
         const distance = Math.abs(elPos - wrapperPos + offset)
         return { element, distance, elRect, offset }
@@ -82,10 +83,9 @@ export class ScrollSnap {
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
       return
     }
-    // console.log(element.element)
+
     this.lenis.scrollTo(element.element, { offset: element.offset })
   }
 }

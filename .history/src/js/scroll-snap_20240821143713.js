@@ -4,7 +4,8 @@
 export class ScrollSnap {
   constructor(lenis, { snapType }) {
     this.lenis = lenis
-    this.isHorizontal = this.lenis.options.orientation === 'horizontal' // we can set different value in case we need snap for different axis.
+    console.log(this.lenis.options)
+    this.isHorizontal = this.lenis.options.direction === 'horizontal' // we can set different value in case we need snap for different axis.
     this.rootElement =
       this.lenis.options.wrapperNode === window
         ? this.lenis.options.content
@@ -51,6 +52,7 @@ export class ScrollSnap {
         : this.lenis.options.wrapper.getBoundingClientRect()
 
     const wrapperPos = this.isHorizontal ? wrapperRect.left : wrapperRect.top
+    console.log(this.isHorizontal)
 
     // find the closest element according to the scroll position
     const elements = this.elements
@@ -82,10 +84,9 @@ export class ScrollSnap {
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
       return
     }
-    // console.log(element.element)
+
     this.lenis.scrollTo(element.element, { offset: element.offset })
   }
 }

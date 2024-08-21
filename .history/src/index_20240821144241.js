@@ -19,6 +19,7 @@ const lenisMandatory = new Lenis({
 })
 
 new ScrollSnap(lenisMandatory, { snapType: '' })
+
 function raf(time) {
   lenis.raf(time)
   lenisMandatory.raf(time)

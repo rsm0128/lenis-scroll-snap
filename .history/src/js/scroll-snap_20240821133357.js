@@ -4,20 +4,19 @@
 export class ScrollSnap {
   constructor(lenis, { snapType }) {
     this.lenis = lenis
-    this.isHorizontal = this.lenis.options.orientation === 'horizontal' // we can set different value in case we need snap for different axis.
-    this.rootElement =
-      this.lenis.options.wrapperNode === window
-        ? this.lenis.options.content
-        : this.lenis.options.wrapper
+    this.isHorizontal = this.lenis.direction === 'horizontal' // we can set different value in case we need snap for different axis.
+    this.rootElement = this.lenis.wrapperNode === window ? this.lenis.contentNode : this.lenis.wrapperNode
     this.snapType = snapType || this.rootElement.getAttribute('scroll-snap-type') || 'mandatory'
 
     this.initElements()
-    this.lenis.on('scroll', this.onScroll.bind(this)) // Bind the method
+    lenis.on('scroll', this.onScroll)
   }
 
   initElements() {
     this.elements = Array.from(
-      this.rootElement.querySelectorAll('[scroll-snap-align]:not([scroll-snap-align="none"]')
+      this.rootElement.querySelectorAll(
+        '[scroll-snap-align]:not([scroll-snap-align="none"]'
+      )
     ).map((element) => {
       let snapAlign = element.getAttribute('scroll-snap-align')
       if (!['start', 'center', 'end', 'none'].includes(snapAlign)) {
@@ -37,18 +36,18 @@ export class ScrollSnap {
     })
   }
 
-  onScroll({ velocity }) {
+  onScroll = ({ velocity }) => {
     if (Math.abs(velocity) > 0.1) return
 
     const wrapperRect =
-      this.lenis.options.wrapperNode === window
+      this.lenis.wrapperNode === window
         ? {
             left: 0,
             top: 0,
             width: this.lenis.wrapperWidth,
             height: this.lenis.wrapperHeight,
           }
-        : this.lenis.options.wrapper.getBoundingClientRect()
+        : this.lenis.wrapperNode.getBoundingClientRect()
 
     const wrapperPos = this.isHorizontal ? wrapperRect.left : wrapperRect.top
 
@@ -76,16 +75,15 @@ export class ScrollSnap {
       .sort((a, b) => a.distance - b.distance)
 
     let limit = this.isHorizontal ? wrapperRect.width : wrapperRect.height
-    if ('proximity' === this.snapType) {
+    if ( 'proximity' === this.snapType ) {
       limit *= 0.3 // proximity is 30%
     }
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
       return
     }
-    // console.log(element.element)
+
     this.lenis.scrollTo(element.element, { offset: element.offset })
   }
 }

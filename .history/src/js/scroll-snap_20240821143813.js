@@ -51,6 +51,7 @@ export class ScrollSnap {
         : this.lenis.options.wrapper.getBoundingClientRect()
 
     const wrapperPos = this.isHorizontal ? wrapperRect.left : wrapperRect.top
+    console.log(this.isHorizontal)
 
     // find the closest element according to the scroll position
     const elements = this.elements
@@ -82,10 +83,9 @@ export class ScrollSnap {
 
     const element = elements[0]
     if (element.distance >= limit) {
-      console.log('skip')
       return
     }
-    // console.log(element.element)
+
     this.lenis.scrollTo(element.element, { offset: element.offset })
   }
 }

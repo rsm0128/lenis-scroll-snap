@@ -81,7 +81,7 @@ export class ScrollSnap {
     }
 
     const element = elements[0]
-    if (element.distance >= limit) {
+    if (element.distance <= limit) {
       console.log('skip')
       return
     }
